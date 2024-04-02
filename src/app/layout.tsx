@@ -1,7 +1,10 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
+
 import '@/styles/globals.css';
+import Navbar from '@/components/navbar';
+import { ThemeProvider } from '@/components/theme-provider';
 
 const fontSchema = Poppins({
   subsets: ['latin'],
@@ -20,7 +23,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' className='select-none antialiased'>
-      <body className={fontSchema.className}>{children}</body>
+      <body className={fontSchema.className}>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='system'
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          <main className='container px-6'>{children}</main>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

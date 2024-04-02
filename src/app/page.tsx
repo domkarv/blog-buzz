@@ -1,9 +1,17 @@
 import React from 'react';
 
-export default function Home() {
+export default function Page() {
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-24'>
-      <h1 className='text-center text-4xl font-bold'>Blog Buzz</h1>
-    </main>
+    <>
+      <h1 className='text-2xl font-bold'>Blog Buzz</h1>
+      <p className='text-justify'>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea asperiores
+        nihil odio. Consequatur quam voluptatum voluptatibus! Ullam ipsa quos
+        natus fugiat explicabo asperiores temporibus iste, numquam voluptates!
+        Pariatur ipsum cupiditate, quam eos dignissimos nemo quis facere iste
+        molestiae, fugiat facilis tenetur quae nesciunt unde. Obcaecati
+        provident expedita sed praesentium? Culpa.
+      </p>
+    </>
   );
 }
