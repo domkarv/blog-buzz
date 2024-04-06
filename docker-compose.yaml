@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  next:
+    container_name: blog-buzz-next
+    restart: always
+    build:
+      context: .
+      target: ${NODE_ENV}
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - .next:/app/.next
