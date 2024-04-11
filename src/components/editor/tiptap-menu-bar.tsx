@@ -64,7 +64,7 @@ export default function TipTapMenuBar({ editor }: { editor: Editor | null }) {
         </Toggle>
       </div>
       <Button type='submit' className='font-semibold'>
-        Save
+        Publish
       </Button>
     </div>
   );
