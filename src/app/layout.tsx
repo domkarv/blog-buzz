@@ -22,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' className='select-none antialiased'>
-      <body className={fontSchema.className}>
+    <html lang='en' suppressHydrationWarning>
+      <body className={`${fontSchema.className} select-none antialiased`}>
         <ThemeProvider
           attribute='class'
           defaultTheme='system'
