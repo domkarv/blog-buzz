@@ -46,16 +46,14 @@ export default function TipTapEditor() {
 
   function onFormSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (editor!.getHTML().length >= 50) {
-      createBlog(inputRef.current!.value, editor!.getHTML());
-    }
+    createBlog(inputRef.current!.value, editor!.getHTML());
   }
 
   return (
-    <div className='flex flex-col justify-stretch rounded-md border text-primary'>
+    <div className='mb-24 mt-8 flex flex-col justify-stretch rounded-md border text-primary'>
       <form onSubmit={onFormSubmit}>
         <Input
-          className='h-16 rounded-b-none border-l-0 border-r-0 border-t-0 pl-4 text-2xl font-bold shadow-none'
+          className='h-16 rounded-b-none border-l-0 border-r-0 border-t-0 pl-4 text-2xl font-semibold shadow-none'
           placeholder='Title'
           type='text'
           name='title'

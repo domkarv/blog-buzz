@@ -1,17 +1,56 @@
+import { getBlogs } from '@/actions/blog';
+import { Separator } from '@/components/ui/separator';
+import Link from 'next/link';
 import React from 'react';
 
-export default function Page() {
+export default async function Page() {
+  const blogs = await getBlogs();
+
   return (
-    <>
-      <h1 className='text-2xl font-bold'>Blog Buzz</h1>
-      <p className='text-justify'>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea asperiores
-        nihil odio. Consequatur quam voluptatum voluptatibus! Ullam ipsa quos
-        natus fugiat explicabo asperiores temporibus iste, numquam voluptates!
-        Pariatur ipsum cupiditate, quam eos dignissimos nemo quis facere iste
-        molestiae, fugiat facilis tenetur quae nesciunt unde. Obcaecati
-        provident expedita sed praesentium? Culpa.
-      </p>
-    </>
+    <div className='my-8 text-primary'>
+      {blogs ? (
+        blogs.length === 0 ? (
+          <p>No blogs found.</p>
+        ) : (
+          blogs.map((blog) => (
+            <div key={blog.id}>
+              <div className='flex flex-row justify-between'>
+                <Link
+                  href={`/blog/${blog.id}`}
+                  className='py-2 text-xl font-bold hover:underline'
+                >
+                  {blog.title}
+                </Link>
+                <p className='text-sm text-gray-500'>
+                  {`Published at ${new Date(blog.publishedAt).toLocaleDateString()}`}
+                </p>
+              </div>
+              <div
+                className='inline'
+                dangerouslySetInnerHTML={{
+                  __html:
+                    blog.content &&
+                    blog.content
+                      .replace(/<[^>]+>/g, '')
+                      .split(' ')
+                      .slice(0, 80)
+                      .join(' ') + '...',
+                }}
+              />
+              <Link
+                href={`/blog/${blog.id}`}
+                className='inline whitespace-nowrap text-sm text-blue-700'
+              >
+                {' '}
+                Read more
+              </Link>
+              <Separator className='my-2' />
+            </div>
+          ))
+        )
+      ) : (
+        <p>No blogs found.</p>
+      )}
+    </div>
   );
 }

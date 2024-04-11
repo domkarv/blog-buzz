@@ -1,6 +1,12 @@
-import mongoose from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 
-const blogSchema = new mongoose.Schema({
+export interface dbBlog {
+  title: string;
+  content: string;
+  publishedAt: Date;
+}
+
+const blogSchema = new mongoose.Schema<dbBlog>({
   title: {
     type: String,
     required: true,
@@ -15,4 +21,6 @@ const blogSchema = new mongoose.Schema({
   },
 });
 
-export const Blog = mongoose.models.Blog || mongoose.model('Blog', blogSchema);
+export const Blog = mongoose.models.Blog
+  ? (mongoose.models.Blog as Model<dbBlog>)
+  : mongoose.model<dbBlog>('Blog', blogSchema);
