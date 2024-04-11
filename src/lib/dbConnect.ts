@@ -28,3 +28,7 @@ export const connectDB = async (): Promise<void> => {
     process.exit(1);
   }
 };
+
+/* 
+'mongodb+srv://omkardate29:omkardate29@cluster0.e4bbbpx.mongodb.net/blog-db'
+*/
