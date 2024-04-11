@@ -2,18 +2,17 @@ import React from 'react';
 import { getBlog, getBlogs } from '@/actions/blog';
 import { Separator } from '@/components/ui/separator';
 
-type Params = {
-  id: string;
-};
-
 export async function generateStaticParams() {
   const blogs = await getBlogs();
-  return blogs?.map((blog) => ({
-    params: { id: blog.id },
-  }));
+
+  return (
+    blogs?.map((blog) => ({
+      id: blog.id,
+    })) || []
+  );
 }
 
-export default async function Page({ params }: { params: Params }) {
+export default async function Page({ params }: { params: { id: string } }) {
   const blog = await getBlog(params.id);
 
   if (!blog) {
