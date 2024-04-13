@@ -1,15 +1,14 @@
 'use server';
 
-import { connectDB } from '@/lib/dbConnect';
-import { Blog, dbBlog } from '@/model/blog';
+import { db } from '../../drizzle';
+import { BlogType, blog } from '../../drizzle/schema';
+import { eq } from 'drizzle-orm';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 
 export async function createBlog(title: string, content: string) {
-  await connectDB();
-
   try {
-    await Blog.create({ title, content });
+    await db.insert(blog).values({ title, content });
 
     console.log('Blog created successfully!');
   } catch (error) {
@@ -21,24 +20,21 @@ export async function createBlog(title: string, content: string) {
 }
 
 export async function getBlogs() {
-  await connectDB();
-
   try {
-    const blogs = await Blog.find();
-
+    const blogs = await db.query.blog.findMany();
     return blogs;
   } catch (error) {
     console.error('Error getting blogs:', error);
   }
 }
 
-export async function getBlog(id: string): Promise<dbBlog | null> {
-  await connectDB();
-
+export async function getBlog(id: string): Promise<BlogType | null> {
   try {
-    const blog = await Blog.findById(id);
+    const oneBlog = await db.select().from(blog).where(eq(blog.id, id));
 
-    return blog;
+    if (!oneBlog[0]) return null;
+
+    return oneBlog[0];
   } catch (error) {
     console.error('Error getting blog:', error);
     return null;

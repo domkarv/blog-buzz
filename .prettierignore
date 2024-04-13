@@ -1,6 +1,8 @@
 pnpm-lock.yaml
 yarn.lock
 
+README.md
+
 /node_modules
 /.pnp
 .pnp.js
