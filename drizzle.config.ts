@@ -5,7 +5,12 @@ export default {
   out: 'drizzle/migrations',
   schema: 'drizzle/schema/index.ts',
   dbCredentials: {
-    connectionString: String(process.env.DATABASE_URL),
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_INITIAL_NAME,
+    port: process.env.DB_PORT,
+    ssl: true,
   },
   verbose: true,
   strict: true,
