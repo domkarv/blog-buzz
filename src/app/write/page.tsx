@@ -1,7 +1,5 @@
-'use client';
-
-import TipTapEditor from '@/components/editor/tiptap-editor';
+import RichTextEditor from '@/components/editor/richtexteditor';
 
 export default function Page() {
-  return <TipTapEditor />;
+  return <RichTextEditor />;
 }
